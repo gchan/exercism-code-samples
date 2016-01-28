@@ -12,15 +12,14 @@ class Scrabble
   }
 
   def initialize(word)
-    @word = word&.strip
+    @word = word.to_s.strip
   end
 
   def score
-    return 0 if word.nil? || word.empty?
-
     word.downcase.chars.
-      map { |letter| LETTER_SCORE[letter.to_sym] }.
-      inject(:+)
+      map(&:to_sym).
+      map(&LETTER_SCORE).
+      inject(0, :+)
   end
 
   def self.score(word)

@@ -7,7 +7,7 @@ class Nucleotide
   end
 
   def count(nucleotide)
-    dna.scan(nucleotide).count
+    dna.count(nucleotide)
   end
 
   def histogram
