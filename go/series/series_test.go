@@ -84,3 +84,9 @@ func TestFrist(t *testing.T) {
 		}
 	}
 }
+
+func Benchmark(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		All(2, "98273463")
+	}
+}

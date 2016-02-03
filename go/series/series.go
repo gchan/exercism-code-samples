@@ -2,8 +2,9 @@ package slice
 
 // All returns a list of all substrings of s with length n.
 func All(n int, s string) (substrings []string) {
+	substrings = make([]string, len(s)-n+1)
 	for i := 0; i <= len(s)-n; i++ {
-		substrings = append(substrings, s[i:i+n])
+		substrings[i] = s[i : i+n]
 	}
 	return
 }
