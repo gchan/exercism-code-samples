@@ -1,6 +1,8 @@
 package foodchain
 
-import "fmt"
+import (
+	"bytes"
+)
 
 // TestVersion is the version of the test suite this code is written to.
 const TestVersion = 1
@@ -25,12 +27,15 @@ func Verse(verse int) string {
 	animalIndex := verse - 1
 	firstAnimal := animals[animalIndex]
 	animalChain := animals[0 : animalIndex+1]
+	var lyrics bytes.Buffer
 
-	lyrics := fmt.Sprintf("I know an old lady who swallowed a %s.\n", firstAnimal)
-	lyrics += animalDescription[animalIndex]
+	lyrics.WriteString("I know an old lady who swallowed a ")
+	lyrics.WriteString(firstAnimal)
+	lyrics.WriteString(".\n")
+	lyrics.WriteString(animalDescription[animalIndex])
 
 	if firstAnimal == "horse" {
-		return lyrics
+		return lyrics.String()
 	}
 
 	for i := len(animalChain) - 1; i > 0; i-- {
@@ -41,23 +46,30 @@ func Verse(verse int) string {
 			animal2 = "spider that wriggled and jiggled and tickled inside her"
 		}
 
-		lyrics += fmt.Sprintf("She swallowed the %s to catch the %s.\n", animal1, animal2)
+		lyrics.WriteString("She swallowed the ")
+		lyrics.WriteString(animal1)
+		lyrics.WriteString(" to catch the ")
+		lyrics.WriteString(animal2)
+		lyrics.WriteString(".\n")
+
 	}
 
-	lyrics += "I don't know why she swallowed the fly. Perhaps she'll die."
+	lyrics.WriteString("I don't know why she swallowed the fly. Perhaps she'll die.")
 
-	return lyrics
+	return lyrics.String()
 }
 
 // Verses returns the verses between from and to of the song 'I Know an Old Lady Who Swallowed a Fly'
-func Verses(from, to int) (lyrics string) {
-	for i := from; i < to; i++ {
-		lyrics += Verse(i)
-		lyrics += "\n\n"
-	}
-	lyrics += Verse(to)
+func Verses(from, to int) string {
+	var lyrics bytes.Buffer
 
-	return
+	for i := from; i < to; i++ {
+		lyrics.WriteString(Verse(i))
+		lyrics.WriteString("\n\n")
+	}
+	lyrics.WriteString(Verse(to))
+
+	return lyrics.String()
 }
 
 // Song returns all the verses of the song 'I Know an Old Lady Who Swallowed a Fly'
