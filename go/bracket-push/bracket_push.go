@@ -7,22 +7,22 @@ const testVersion = 3
 func Bracket(brackets string) (bool, error) {
 	stk := []rune{}
 	translate := map[rune]rune{
-		')': '(',
-		'}': '{',
-		']': '[',
+		'(': ')',
+		'{': '}',
+		'[': ']',
 	}
 
 	for _, char := range brackets {
-		if char == '(' || char == '[' || char == '{' {
+		if translate[char] != 0 {
 			stk = append(stk, char)
 		} else {
 			if len(stk) == 0 {
 				return false, nil
 			}
-			var closingChar rune
-			closingChar, stk = stk[len(stk)-1], stk[:len(stk)-1]
+			var openingChar rune
+			openingChar, stk = stk[len(stk)-1], stk[:len(stk)-1]
 
-			if closingChar != translate[char] {
+			if translate[openingChar] != char {
 				return false, nil
 			}
 		}
