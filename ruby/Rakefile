@@ -1,0 +1,11 @@
+task default: :test
+
+desc "Run all tests"
+task :test do
+  # puts `find . | grep test.rb | xargs -n 1 ruby`
+  Dir.glob("./**/*_test.rb").each do |file|
+    puts "=" * 50
+    puts file
+    puts `ruby #{file}`
+  end
+end
