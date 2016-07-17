@@ -13,3 +13,5 @@ My code samples are often supplemented with brief notes on trade-offs, alternate
 ### License
 
 MIT
+
+[![Analytics](https://ga-beacon.appspot.com/UA-70790190-2/exercism-code-samples/README.md?flat)](https://github.com/igrigorik/ga-beacon)
