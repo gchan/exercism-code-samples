@@ -14,7 +14,7 @@ class TwoBucket
 
     moves_count = 0
 
-    while !solved?
+    until solved?
       move
       moves_count +=1
     end
